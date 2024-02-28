@@ -44,11 +44,29 @@ table {
 }
 
 th, td {
-  border: 1px solid #ddd; /* Light grey border */
+  border: 1px solid #ddd;
   text-align: left;
   padding: 8px;
 }
 
 th {
-  background-color: #f2f2f2; /* Light grey background for headers */
+  background-color: #520404; 
+}
+
+
+.form-group {
+  margin: 20px 0;
+}
+
+input, button {
+  margin-top: 10px;
+}
+
+.Card {
+  background-color: #282c34;
+  color: white;
+}
+
+.Form-control, .Button {
+  margin-top: 10px;
 }

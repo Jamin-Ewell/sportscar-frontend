@@ -9,3 +9,18 @@ export const getAvailableCars = async () => {
     throw error;
   }
 };
+
+// Example implementation
+export async function updateCarStatus(id: any, newStatus: any) {
+  const response = await fetch(`https://localhost:7131/cars/update/${id}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ status: newStatus }),
+  });
+  if (!response.ok) {
+    throw new Error('Could not update car status');
+  }
+  return await response.json();
+}

@@ -1,61 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { Navbar, Nav } from 'react-bootstrap';
+import Home from './Home';
+import Edit from './Edit';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { getAvailableCars } from './services/carService';
-
-interface Car {
-  id: number;
-  make: string;
-  model: string;
-  year: number;
-}
 
 function App() {
-  const [cars, setCars] = useState<Car[]>([]);
-
-  useEffect(() => {
-    const fetchCars = async () => {
-      try {
-        const availableCars = await getAvailableCars();
-        setCars(availableCars);
-      } catch (error) {
-        console.error('Error fetching cars:', error);
-      }
-    };
-
-    fetchCars();
-  }, []);
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src="https://images.pexels.com/photos/919073/pexels-photo-919073.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" className="App-logo" alt="Car" />
-        <h1>Available Cars</h1>
-        {cars.length > 0 ? (
-          <table>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Make</th>
-                <th>Model</th>
-                <th>Year</th>
-              </tr>
-            </thead>
-            <tbody>
-              {cars.map((car) => (
-                <tr key={car.id}>
-                  <td>{car.id}</td>
-                  <td>{car.make}</td>
-                  <td>{car.model}</td>
-                  <td>{car.year}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        ) : (
-          <p>No cars available.</p>
-        )}
-      </header>
-    </div>
+    <Router>
+      <div>
+        <Navbar bg="dark" variant="dark" expand="lg">
+          <Navbar.Brand as={Link} to="/">Car Inventory</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="mr-auto">
+              <Nav.Link as={Link} to="/">Home</Nav.Link>
+              <Nav.Link as={Link} to="/edit">Edit</Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/edit" element={<Edit />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
